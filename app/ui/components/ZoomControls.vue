@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {map} from "@/map/map.ts";
+import {map} from "@/main.ts";
 
 const zoomIn = () => map.zoomIn(1.2)
 const zoomOut = () => map.zoomOut(1.2)
