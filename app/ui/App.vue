@@ -5,6 +5,8 @@ import {useMarkerStore} from "@/store/marker.ts";
 import {map} from "@/main.ts";
 import {geocodeSearch} from "@/api/geocode/geocodeRequests.ts";
 import {LatLng} from "leaflet";
+import LocationPopUp from "@/ui/components/LocationPopUp.vue";
+import {ref} from "vue";
 
 const markerStore = useMarkerStore()
 
@@ -29,6 +31,8 @@ const queryStreet = async (street: string) => {
     <ZoomControls />
 
     <SearchBar :search-fn="queryStreet"/>
+
+    <LocationPopUp :is-hidden="!markerStore.latlng" />
 </template>
 
 <style scoped></style>

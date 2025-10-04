@@ -19,6 +19,8 @@ export default class Marker {
             if (newLatLng) {
                 this.marker.setLatLng(newLatLng)
                 this.marker.setOpacity(1)
+            } else {
+                this.marker.setOpacity(0)
             }
         })
     }
