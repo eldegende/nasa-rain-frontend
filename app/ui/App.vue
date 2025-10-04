@@ -7,8 +7,12 @@ import {geocodeSearch} from "@/api/geocode/geocodeRequests.ts";
 import {LatLng} from "leaflet";
 import LocationPopUp from "@/ui/components/LocationPopUp.vue";
 import {ref} from "vue";
+import ForecastDialog from "@/ui/components/dialog/ForecastDialog.vue";
 
 const markerStore = useMarkerStore()
+
+const showForecast = ref(true)
+const hideForecast = () => showForecast.value = false
 
 const queryStreet = async (street: string) => {
     const response = await geocodeSearch(street)
@@ -27,12 +31,27 @@ const queryStreet = async (street: string) => {
 </script>
 
 <template>
-    <h3>pos: {{markerStore.latlng && markerStore.latlng.toString()}}</h3>
     <ZoomControls />
 
     <SearchBar :search-fn="queryStreet"/>
 
-    <LocationPopUp :is-hidden="!markerStore.latlng" />
+    <LocationPopUp :is-hidden="!markerStore.latlng" :forecast-fn="() => showForecast = true" />
+
+    <Transition>
+        <ForecastDialog v-if="showForecast" :hide-fn="hideForecast" />
+    </Transition>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
+</style>

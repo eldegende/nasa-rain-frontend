@@ -3,7 +3,8 @@ import {useMarkerStore} from "@/store/marker.ts";
 import {computed, ref} from "vue";
 
 const props = defineProps<{
-    isHidden: boolean
+    isHidden: boolean,
+    forecastFn: Function
 }>()
 
 const date = ref<Date | null>(null)
@@ -30,7 +31,7 @@ const pos = computed((): string => {
         </div>
 
         <div class="buttons">
-            <button :disabled="!date">Forecast</button>
+            <button @click="() => forecastFn()" :disabled="!date">Forecast</button>
             <button @click="cleanMarkerPos" class="round-btn">❌</button>
         </div>
     </div>
