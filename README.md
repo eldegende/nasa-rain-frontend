@@ -2,6 +2,13 @@
 
 Frontend for rain forecast webapp of "cosmokotiki" on topic "Will it rain on my parade?".
 
+Used tech:
+- VueJS as UI framework
+- Leaflet with OpenStreetMap
+- Nominatim for querying locations
+- Axios for API requests
+- Written on TypeScript
+
 ## Project Setup
 Requires NodeJS installed first.
 
