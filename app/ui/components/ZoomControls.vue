@@ -18,8 +18,8 @@ const zoomOut = () => map.zoomOut(1.2)
     padding: 4px;
 
     position: fixed;
-    bottom: 12px;
-    left: 12px;
+    bottom: var(--fixed-margin);
+    left: var(--fixed-margin);
 
     display: flex;
     flex-direction: column;

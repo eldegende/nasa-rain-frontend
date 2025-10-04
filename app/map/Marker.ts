@@ -1,5 +1,6 @@
 import L, {type LeafletMouseEvent} from "leaflet";
 import {useMarkerStore} from "../store/marker.ts";
+import {watch} from "vue";
 
 export default class Marker {
 
@@ -13,12 +14,16 @@ export default class Marker {
 
         this.marker = L.marker([0, 0]).addTo(this.map).setOpacity(0)
         this.map.on("click", this.onMapClick.bind(this))
+
+        watch(() => this.markerStore.latlng, (newLatLng) => {
+            if (newLatLng) {
+                this.marker.setLatLng(newLatLng)
+                this.marker.setOpacity(1)
+            }
+        })
     }
 
     private onMapClick(e: LeafletMouseEvent) {
-        this.marker.setOpacity(1)
-        this.marker.setLatLng(e.latlng)
-
         this.markerStore.latlng = e.latlng
     }
 
