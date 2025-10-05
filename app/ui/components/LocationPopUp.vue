@@ -20,6 +20,19 @@ const pos = computed((): string => {
     else return "0 0"
 })
 
+
+const fetchForecast = async () => {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/forecast?lat=${markerStore.latlng.lat}&lon=${markerStore.latlng.lng}&date=${markerStore.date}`)
+        const data = await res.json()
+        markerStore.setForecast(data)
+        // showForecast.value = true
+    } catch (err) {
+        console.error(err)
+        alert("Ошибка при получении прогноза")
+    }
+}
+
 </script>
 
 <template>
@@ -31,7 +44,7 @@ const pos = computed((): string => {
         </div>
 
         <div class="buttons">
-            <button @click="() => forecastFn()" :disabled="!date">Forecast</button>
+            <button @click="fetchForecast" :disabled="!date">Forecast</button>
             <button @click="cleanMarkerPos" class="round-btn">❌</button>
         </div>
     </div>

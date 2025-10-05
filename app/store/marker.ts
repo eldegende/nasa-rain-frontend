@@ -5,7 +5,7 @@ export const useMarkerStore = defineStore("marker", {
     state: () => ({
         latlng: null as L.LatLng | null,
         date: "",           
-        forecast: null      
+        forecast: null
     }),
     actions: {
         setDate(d: string) {

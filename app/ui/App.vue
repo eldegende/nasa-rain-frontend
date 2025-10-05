@@ -2,12 +2,12 @@
     <ZoomControls />
     <SearchBar :search-fn="queryStreet"/>
     
-    <input type="date" v-model="markerStore.date" />
 
-    <LocationPopUp 
+
+<!--    <LocationPopUp
         :is-hidden="!markerStore.latlng" 
         :forecast-fn="fetchForecast" 
-    />
+    />-->
 
     <Transition>
         <ForecastDialog
@@ -17,9 +17,14 @@
         />
     </Transition>
 
-    <button v-if="markerStore.latlng && markerStore.date" @click="fetchForecast">
-        Forecast
-    </button>
+
+
+    <div class="forecast_select">
+        <input type="date" v-model="markerStore.date" />
+        <button v-if="markerStore.latlng && markerStore.date" @click="fetchForecast">
+            Forecast
+        </button>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -62,3 +67,12 @@ const fetchForecast = async () => {
     }
 }
 </script>
+
+<style scoped>
+.forecast_select {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+</style>
